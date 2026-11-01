@@ -1,0 +1,13 @@
+# Virtual environment
+Include/
+Lib/
+Scripts/
+share/
+venv/
+pyvenv.cfg
+
+# Python / editor
+__pycache__/
+*.pyc
+tempCodeRunnerFile.py
+.vscode/
