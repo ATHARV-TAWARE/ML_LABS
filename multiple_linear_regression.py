@@ -11,6 +11,10 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import statsmodels.api as sm
 
+# read file 
+df = pd.read_csv("file_name.csv") # file in same folder
+print(df.head())
+
 # Generate dateset
 
 np.random.seed(42)
@@ -94,3 +98,16 @@ print(vif_data.round(2))
 
 # detailed OLS summery
 
+x_train_sm =sm.add_constant(x_train)
+ols_model = sm.OLS(y_train, x_train_sm).fit()
+print(ols_model.summary())
+
+# residual plot
+
+#%% Cell 8
+plt.scatter(y_pred, residual)
+plt.axhline(y=0, color="red", linestyle="--")
+plt.xlabel("Predicted House Price")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Predicted Values")
+plt.show()

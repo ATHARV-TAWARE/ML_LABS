@@ -7,6 +7,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
+# read file 
+df = pd.read_csv("file_name.csv") # file in same folder
+print(df.head())
+
 
 # generate synthetic dataset
 

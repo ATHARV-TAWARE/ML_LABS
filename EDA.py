@@ -4,6 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+# read file 
+df = pd.read_csv("file_name.csv") # file in same folder
+print(df.head())
+
+# create the dataset
 
 df = pd.DataFrame({
     "customer_id": [101, 102,103, 104, 105, 106, 107], 
