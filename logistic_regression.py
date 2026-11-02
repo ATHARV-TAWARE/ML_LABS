@@ -16,7 +16,7 @@ from sklearn.metrics import (
 
 # read csv file 
 
-df = pd.read_csv("exy.csv")
+df = pd.read_csv("heart.csv")
 print(df.head())
 print(df.columns)
 

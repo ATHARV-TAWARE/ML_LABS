@@ -1,53 +1,82 @@
-# Import libraries and create the dataset
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-# read file 
-df = pd.read_csv("file_name.csv") # file in same folder
+
+# 1. Load the dataset
+df = pd.read_csv("file_name.csv")
+
+print("first five rows:")
 print(df.head())
 
-# Numerical columns
-num_cols = ["Age", "Income"]
-
-# Categorical columns
-cat_cols = ["City"]
-
-# Inspect the dataset and fill missing values
-
+# 2. Display dataset information
+print("\ndataset information:")
 df.info()
+
+print("\nmissing values:")
 print(df.isnull().sum())
-df["age"]= df["age"].fillna(df["age"].median())
-df["annual_income_k"]= df["annual_income_k"].fillna(df["annual_income_k"].median())
-df["city"]= df["city"].fillna(df["city"].mode()[0])
+
+# 3. Define numerical and categorical columns
+num_cols = ["age", "annual_income_k"]
+cat_cols = ["city"]
+
+# 4. Handle missing values in numerical columns
+for col in num_cols:
+    df[col] = df[col].fillna(df[col].median())
+
+# 5. Handle missing values in categorical columns
+for col in cat_cols:
+    df[col] = df[col].fillna(df[col].mode()[0])
+
+print("\ndata after handling missing values:")
 print(df)
 
-# Detect and cap outliers using IQR
-
+# 6. Detect and handle outliers using IQR
 Q1 = df["annual_income_k"].quantile(0.25)
 Q3 = df["annual_income_k"].quantile(0.75)
+
 IQR = Q3 - Q1
+
 lower = Q1 - (1.5 * IQR)
 upper = Q3 + (1.5 * IQR)
-df["annual_income_k"] =df["annual_income_k"].clip(lower, upper)
-print("lower:", lower, "\nupper:", upper)
+
+df["annual_income_k"] = df["annual_income_k"].clip(
+    lower=lower, upper=upper
+)
+
+print("\nlower limit:", lower)
+print("upper limit:", upper)
+print("\nincome after outlier capping:")
 print(df["annual_income_k"])
 
-# Encode City and scale numerical features
+# 7. Categorical encoding
+encoder = LabelEncoder()
+df["city"] = encoder.fit_transform(df["city"])
 
+print("\ndata after categorical encoding:")
+print(df)
+
+# 8. Feature scaling
 scaler = StandardScaler()
-df[["age", "annual_income_k"]] = scaler.fit_transform(df[["age", "annual_income_k"]])
-print("final cleaned data: ")
+
+df[num_cols] = scaler.fit_transform(df[num_cols])
+
+print("\ncleaned and scaled data:")
 print(df.round(2))
 
-# generate histogram for age and annual_income_k
+# 9. Plot histograms
+df[num_cols].hist(figsize=(8, 6))
 
-df[["age", "annual_income_k"]].hist(figsize=(8, 6))
 plt.tight_layout()
 plt.show()
 
-# generate correlation heatmap 
+# 10. Plot correlation heatmap
+sns.heatmap(
+    df.corr(numeric_only=True),
+    annot=True,
+    cmap="coolwarm"
+)
 
-sns.heatmap(df.corr(numeric_only=True), annot=True, cmap="coolwarm")
+plt.title("correlation heatmap")
 plt.show()
