@@ -16,39 +16,8 @@ from sklearn.metrics import (
 
 # read file 
 
-# df = pd.read_csv("file_name.csv") # file in same folder
-# print(df.head()) 
-
-# generate dataset
-
-np.random.seed(42)
-n_samples = 1000
-
-data = {
-    'Debt_to_Income_Ratio': np.random.uniform(0.1, 0.8, n_samples),
-    'Credit_Score': np.random.randint(300, 850, n_samples),
-    'Annual_Income': np.random.uniform(20000, 150000, n_samples),
-    'Missed_Payments_Count': np.random.randint(0, 10, n_samples)
-}
-
-df = pd.DataFrame(data)
-
-risk_index = (
-    df['Debt_to_Income_Ratio'] * 2.5
-    + df['Missed_Payments_Count'] * 0.4
-    - df['Credit_Score'] / 300.0
-)
-
-df['Credit_Risk_Rating'] = pd.qcut(
-    risk_index,
-    q=3,
-    labels=[0, 1, 2]
-).astype(int)
-
-print(df.head())
-print("\nDataset shape:", df.shape)
-print("\nRisk class counts:")
-print(df['Credit_Risk_Rating'].value_counts().sort_index())
+df = pd.read_csv("file_name.csv") # file in same folder
+print(df.head()) 
 
 # seperate features and split data
 

@@ -15,35 +15,6 @@ import statsmodels.api as sm
 df = pd.read_csv("file_name.csv") # file in same folder
 print(df.head())
 
-# Generate dateset
-
-np.random.seed(42)
-n_samples = 500
-
-sqft = np.random.normal(2100, 500, n_samples).clip(800, 4500)
-bedrooms = np.random.choice([1, 2, 3, 4, 5], n_samples)
-dist_transit = np.random.exponential(4.0, n_samples).clip(0.5, 20)
-age = np.random.uniform(1, 40, n_samples)
-school_rating = np.random.uniform(3.0, 9.8, n_samples)
-
-noise = np.random.normal(0, 25000, n_samples)
-
-price = (
-    150 * sqft + 12000 * bedrooms - 8500 * dist_transit
-    - 1500 * age + 9000 * school_rating + 50000 + noise
-)
-
-df = pd.DataFrame({
-    "Square_Footage": sqft,
-    "Number_of_Bedrooms": bedrooms,
-    "Distance_to_Transit_km": dist_transit,
-    "Age_of_Property": age,
-    "School_Rating": school_rating,
-    "House_Price": price
-})
-
-print(df.head())
-
 # split the dataset
 
 x = df[[

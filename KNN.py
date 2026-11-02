@@ -14,23 +14,10 @@ from sklearn.metrics import (
 )
 
 # read dataset
-
-# the csv has empty filler columns that don't line up with the header,
-# so keep only the non-blank values in each row
-raw = pd.read_csv("credit_risk_knn_dataset.csv", header=None, skiprows=1,
-                  dtype=str, encoding="utf-8-sig")
-columns = ['Debt_to_Income_Ratio', 'Credit_Score', 'Annual_Income',
-           'Total_Assets', 'Credit_Risk_Rating']
-df = pd.DataFrame(
-    [[v for v in row if isinstance(v, str) and v.strip()] for row in raw.values],
-    columns=columns
-).astype(float)
-df['Credit_Risk_Rating'] = df['Credit_Risk_Rating'].astype(int)
+df = pd.read_csv("exy.csv")
 
 print(df.head())
 print(df.columns)
-
-
 
 # seperate features and split data 
 

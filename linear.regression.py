@@ -11,15 +11,10 @@ from sklearn.metrics import mean_squared_error, r2_score
 df = pd.read_csv("file_name.csv") # file in same folder
 print(df.head())
 
-
-# generate synthetic dataset
-
 np.random.seed(42)
-X = np.arange(1, 101)
-y = 3*X + 5 + np.random.normal(0, 10, 100)
-df = pd.DataFrame({"hours": X, "marks": y.round(2)})
-df.to_csv("regression_data.csv", index=False )
-print(df.head())
+n_samples = len(df)
+X = df["hours"].values
+y = df["marks"].values
 
 # split data into training and testing set 
 

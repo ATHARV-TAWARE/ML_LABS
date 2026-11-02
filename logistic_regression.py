@@ -16,22 +16,7 @@ from sklearn.metrics import (
 
 # read csv file 
 
-# header row is misaligned with the data (data has blank columns between values),
-# so skip it and pick the real columns by position
-df = pd.read_csv(
-    "heart_disease_data.csv",
-    skiprows=1,
-    header=None,
-    usecols=[0, 2, 4, 6, 8, 10],
-    names=[
-        "Age",
-        "Resting_Blood_Pressure",
-        "Cholesterol",
-        "Maximum_Heart_Rate",
-        "Exercise_Induced_Angina",
-        "Heart_Disease"
-    ]
-)
+df = pd.read_csv("exy.csv")
 print(df.head())
 print(df.columns)
 

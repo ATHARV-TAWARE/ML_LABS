@@ -8,15 +8,11 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 df = pd.read_csv("file_name.csv") # file in same folder
 print(df.head())
 
-# create the dataset
+# Numerical columns
+num_cols = ["Age", "Income"]
 
-df = pd.DataFrame({
-    "customer_id": [101, 102,103, 104, 105, 106, 107], 
-    "age": [23, 45, None, 31, 22, 54, 38],
-    "annual_income_k": [50, 85, 63, None, 45, 120, 350],
-    "city": ["New York", "Paris", "New York", "London", None, "London", "Paris"]
-})
-print(df)
+# Categorical columns
+cat_cols = ["City"]
 
 # Inspect the dataset and fill missing values
 
